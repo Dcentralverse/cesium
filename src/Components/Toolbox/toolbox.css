@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css?family=BenchNine");
+
+h1 {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: white;
+  margin: 10px 0 10px 10px;
+}
+
+.copy {
+  margin: 15px;
+  font-size: 12px;
+  color: white;
+}
+.copy a {
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  transition: all 0.2s ease-in;
+  opacity: 0.3;
+}
+.copy a:hover {
+  color: #11e8bb;
+  opacity: 1;
+}
+.three-tools {
+  width: 60px;
+  height: 50px;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px dashed #fff;
+  background: #fff 5;
+  transition: all 0.4s ease-in-out;
+}
+.three-tools svg {
+  width: auto;
+  height: 100%;
+  margin: 0 auto;
+}
+.three-tools svg .color-static {
+  transition: all 0.4s ease-in-out;
+}
+.three-tools svg stop {
+  transition: all 0.4s ease-in-out;
+}
+.three-tools:hover {
+  border: 1px solid #11e8bb;
+  background: #fff 10;
+  cursor: pointer;
+}
+.three-tools:hover svg .color-static {
+  fill: #11e8bb;
+}
+.three-tools:hover svg stop:first-child {
+  stop-color: #11e8bb;
+}
+.three-tools:hover svg stop:last-child {
+  stop-color: #11e8bb;
+}
+
+.wrapper {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  transform: translatey(100%);
+}

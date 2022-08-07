@@ -7,6 +7,7 @@ import {
   ScreenSpaceEventHandler,
   Viewer,
 } from "resium";
+import Toolbox from "../Components/Toolbox";
 import { useDrawContext } from "../Contexts/DrawContext";
 import useDraw from "./Utils/useDraw";
 
@@ -62,6 +63,7 @@ function CesiumPage() {
             />
           </ScreenSpaceEventHandler>
         )}
+        <Toolbox />
       </Viewer>
     </div>
   );

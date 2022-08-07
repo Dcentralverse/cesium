@@ -104,15 +104,17 @@ const useDraw = (viewer) => {
 
   // Redraw the shape so it's not dynamic and remove the dynamic shape.
   function terminateShape() {
-    const _activeShapePoints = activeShapePoints;
-    _activeShapePoints.pop();
-    setActiveShapePoints(_activeShapePoints);
-    viewer.current.cesiumElement.entities?.remove(floatingPoint);
-    viewer.current.cesiumElement.entities?.remove(activeShape);
-    drawShape(activeShapePoints);
-    setFloatingPoint(null);
-    setActiveShape(null);
-    setActiveShapePoints([]);
+    if (activeShapePoints.length > 3) {
+      const _activeShapePoints = activeShapePoints;
+      _activeShapePoints.pop();
+      setActiveShapePoints(_activeShapePoints);
+      viewer.current.cesiumElement.entities?.remove(floatingPoint);
+      viewer.current.cesiumElement.entities?.remove(activeShape);
+      drawShape(activeShapePoints);
+      setFloatingPoint(null);
+      setActiveShape(null);
+      setActiveShapePoints([]);
+    }
   }
 
   return {
