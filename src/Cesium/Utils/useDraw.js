@@ -17,17 +17,18 @@ const useDraw = (viewer) => {
     floatingPoint,
     setFloatingPoint,
     drawingMode,
+    setDrawingMode,
   } = useDrawContext();
 
   function createPoint(worldPosition) {
     const point = viewer.current.cesiumElement.entities?.add({
       position: worldPosition,
       point: {
-        color: Color.AZURE,
-        pixelSize: 10,
+        color: Color.WHITE,
+        pixelSize: 5,
         heightReference: HeightReference.CLAMP_TO_GROUND,
-        outlineColor: Color.SLATEBLUE,
-        outlineWidth: 3,
+        outlineColor: Color.BLACK,
+        outlineWidth: 1,
       },
     });
     if (drawingMode === "point") {
@@ -50,7 +51,7 @@ const useDraw = (viewer) => {
       shape = viewer.current.cesiumElement.entities?.add({
         polygon: {
           hierarchy: positionData,
-          material: new ColorMaterialProperty(Color.WHITE.withAlpha(0.7)),
+          material: new ColorMaterialProperty(Color.BLACK.withAlpha(0.2)),
           heightReference: HeightReference.CLAMP_TO_GROUND,
           border: true,
         },
@@ -114,6 +115,7 @@ const useDraw = (viewer) => {
       setFloatingPoint(null);
       setActiveShape(null);
       setActiveShapePoints([]);
+      setDrawingMode(null);
     }
   }
 

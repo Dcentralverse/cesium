@@ -1,24 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDrawContext } from "../../Contexts/DrawContext";
 import "./toolbox.css";
 
 const Toolbox = () => {
-  const { drawingMode, setDrawingMode } = useDrawContext();
+  const { setDrawingMode } = useDrawContext();
 
   const handleChangeDrawingMode = (mode) => {
     setDrawingMode(mode);
   };
-
-  useEffect(() => {
-    console.log(drawingMode);
-  }, [drawingMode]);
 
   return (
     <div className="wrapper">
       <a
         onClick={() => handleChangeDrawingMode("line")}
         className="three-tools"
-        title="Edit Mode"
+        title="Line Mode"
       >
         <svg
           width="78"
@@ -101,7 +97,7 @@ const Toolbox = () => {
       <a
         onClick={() => handleChangeDrawingMode("polygon")}
         className="three-tools"
-        title="Change Camera"
+        title="Polygon Mode"
       >
         <svg
           width="75"
@@ -274,7 +270,7 @@ const Toolbox = () => {
       <a
         onClick={() => handleChangeDrawingMode("point")}
         className="three-tools"
-        title="Rotate Orbit"
+        title="Point Mode"
       >
         <svg
           width="65"

@@ -6,7 +6,7 @@ const DrawProvider = ({ children }) => {
   const [activeShapePoints, setActiveShapePoints] = useState([]);
   const [activeShape, setActiveShape] = useState(undefined);
   const [floatingPoint, setFloatingPoint] = useState(undefined);
-  const [drawingMode, setDrawingMode] = useState("polygon");
+  const [drawingMode, setDrawingMode] = useState(null);
 
   const value = {
     activeShape,
