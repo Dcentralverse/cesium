@@ -1,14 +1,13 @@
-import { Globe, Scene, Viewer } from "resium";
+import React from "react";
+import CesiumPage from "./Cesium";
+import Providers from "./Contexts/Providers";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Viewer>
-        <Scene />
-        <Globe />
-      </Viewer>
-    </div>
+    <Providers>
+      <CesiumPage />
+    </Providers>
   );
-}
+};
 
 export default App;
