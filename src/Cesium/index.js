@@ -9,6 +9,8 @@ import {
 } from "resium";
 import Toolbox from "../Components/Toolbox";
 import { useDrawContext } from "../Contexts/DrawContext";
+import CalculateArea from "./Utils/CalculateArea";
+import PickEntity from "./Utils/PickEntity";
 import useDraw from "./Utils/useDraw";
 
 function CesiumPage() {
@@ -20,7 +22,7 @@ function CesiumPage() {
   const { drawingMode } = useDrawContext();
 
   return (
-    <div id="resium-container">
+    <div id='resium-container'>
       <Viewer
         ref={viewer}
         resolutionScale={window.devicePixelRatio > 1 ? 2 : 1}
@@ -32,7 +34,7 @@ function CesiumPage() {
         targetFrameRate={60} // fps
         sceneModePicker={false}
         fullscreenElement={"resium-container"}
-        geocoder={false}
+        // geocoder={false}
         style={{
           position: "relative",
         }}
@@ -41,28 +43,26 @@ function CesiumPage() {
       >
         <Scene />
         <Globe />
-        {drawingMode && (
-          <ScreenSpaceEventHandler>
-            <ScreenSpaceEvent
-              type={ScreenSpaceEventType.MOUSE_MOVE}
-              action={(event) => {
-                pickPosition(event);
-              }}
-            />
-            <ScreenSpaceEvent
-              type={ScreenSpaceEventType.LEFT_CLICK}
-              action={(event) => {
-                transformPickedPosition(event.position);
-              }}
-            />
-            <ScreenSpaceEvent
-              type={ScreenSpaceEventType.RIGHT_CLICK}
-              action={() => {
-                terminateShape();
-              }}
-            />
-          </ScreenSpaceEventHandler>
-        )}
+        <ScreenSpaceEventHandler>
+          <ScreenSpaceEvent
+            type={ScreenSpaceEventType.MOUSE_MOVE}
+            action={(event) => {
+              drawingMode && pickPosition(event);
+            }}
+          />
+          <ScreenSpaceEvent
+            type={ScreenSpaceEventType.LEFT_CLICK}
+            action={(event) => {
+              drawingMode && transformPickedPosition(event.position);
+            }}
+          />
+          <ScreenSpaceEvent
+            type={ScreenSpaceEventType.RIGHT_CLICK}
+            action={() => {
+              drawingMode && terminateShape();
+            }}
+          />
+        </ScreenSpaceEventHandler>
         <Toolbox />
       </Viewer>
     </div>

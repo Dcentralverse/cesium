@@ -1,12 +1,18 @@
 import {
   CallbackProperty,
+  Cartesian2,
+  Cartesian3,
   Color,
   ColorMaterialProperty,
   defined,
   HeightReference,
+  HorizontalOrigin,
+  LabelStyle,
   PolygonHierarchy,
+  VerticalOrigin,
 } from "cesium";
 import { useDrawContext } from "../../Contexts/DrawContext";
+import CalculateArea from "../Utils/CalculateArea";
 
 const useDraw = (viewer) => {
   const {
@@ -48,7 +54,23 @@ const useDraw = (viewer) => {
         },
       });
     } else if (drawingMode === "polygon") {
+      const data = CalculateArea(positionData) || {};
       shape = viewer.current.cesiumElement.entities?.add({
+        position: Cartesian3.fromDegrees(
+          data?.center?.geometry?.coordinates[0] || 0,
+          data?.center?.geometry?.coordinates[1] || 0
+        ),
+        label: {
+          text: `${data.area?.toFixed(2)} m²`,
+          font: "14px sans-serif",
+          style: LabelStyle.FILL_AND_OUTLINE,
+          fillColor: Color.WHITE,
+          outlineColor: Color.WHITE,
+          outlineWidth: 2,
+          horizontalOrigin: HorizontalOrigin.CENTER,
+          verticalOrigin: VerticalOrigin.BOTTOM,
+          pixelOffset: new Cartesian2(0, -10),
+        },
         polygon: {
           hierarchy: positionData,
           material: new ColorMaterialProperty(Color.BLACK.withAlpha(0.2)),
@@ -105,7 +127,7 @@ const useDraw = (viewer) => {
 
   // Redraw the shape so it's not dynamic and remove the dynamic shape.
   function terminateShape() {
-    if (activeShapePoints.length > 3) {
+    if (activeShapePoints.length > 3 || drawingMode !== "polygon") {
       const _activeShapePoints = activeShapePoints;
       _activeShapePoints.pop();
       setActiveShapePoints(_activeShapePoints);
